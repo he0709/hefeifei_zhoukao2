@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hefeifei.mapper.WeiXiuMapper">
+    <select id="list" resultType="WeiXiu">
+        select * from weixiu
+        <where>
+            <if test="did!='' and did!=null">
+                did like '%${did}%'
+            </if>
+            <if test="uid!='' and uid!=null">
+               and uid like '%${uid}%'
+            </if>
+            <if test="uname!='' and uname!=null">
+                and uname like '%${uname}%'
+            </if>
+            <if test="wname!='' and wname!=null">
+                and wname like '%${wname}%'
+            </if>
+            <if test="shuoming!='' and shuoming!=null">
+                and shuoming like '%${shuoming}%'
+            </if>
+            <if test="yijian!='' and yijian!=null">
+                and yijian like '%${yijian}%'
+            </if>
+            <if test="start!='' and start!=null">
+                and startDate>#{start}
+            </if>
+            <if test="startEnd!='' and startEnd!=null">
+                and startDate &lt; #{startEnd}
+            </if>
+            <if test="endStart!='' and endStart!=null">
+                and endDate>#{endStart}
+            </if>
+            <if test="end!='' and end!=null">
+                and endDate &lt; #{end}
+            </if>
+            <if test="chuStart!='' and chuStart!=null">
+                and chuDate > #{chuStart}
+            </if>
+            <if test="chuEnd!='' and chuEnd!=null">
+                and chuDate &lt; #{chuEnd}
+            </if>
+            <if test="daoStart!='' and daoStart!=null">
+                and daoDate > #{daoStart}
+            </if>
+            <if test="daoEnd!='' and daoEnd!=null">
+                and daoDate &lt; #{daoEnd}
+            </if>
+            <if test="okStart!='' and okStart!=null">
+                and okDate > #{okStart}
+            </if>
+            <if test="okEnd!='' and okEnd!=null">
+                and okDate &lt; #{okEnd}
+            </if>
+        </where>
+    </select>
+    <insert id="add">
+        insert into weixiu(did,uid,uname,wname,startDate,endDate,chuDate,daoDate,okDate,shuoming,type,yijian) values(#{did},#{uid},#{uname},#{wname},#{startDate},#{endDate},#{chuDate},#{daoDate},#{okDate},#{shuoming},#{type},#{yijian})
+    </insert>
+    <update id="upd">
+        update weixiu set did=#{did},uid=#{uid},uname=#{uname},wname=#{wname},startDate=#{startDate},endDate=#{endDate},chuDate=#{chuDate},daoDate=#{daoDate},okDate=#{okDate},shuoming=#{shuoming},type=#{type},yijian=#{type} where id=${id}
+    </update>
+    <select id="selectById" resultType="WeiXiu">
+        select * from weixiu where id=${id}
+    </select>
+    <delete id="del">
+        delete from weixiu where id in (${ids})
+    </delete>
+</mapper>

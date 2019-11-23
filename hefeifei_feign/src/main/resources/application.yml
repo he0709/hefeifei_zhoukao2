@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: feign
+server:
+  port: 8082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka,http://localhost:10087/eureka
+    fetch-registry: true  #作为微服务的消费方，务必将此项设置为true，表示可以从注册中心拉取微服务的注册表从而获取提供方的地址
